@@ -5,49 +5,45 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @Component
 public class StudentService {
-    private final StudentRepository repository;
-
     @Autowired
-    public StudentService(StudentRepository repository) {
-        this.repository = repository;
+    StudentRepository studentRepository;
+    public void addingStudent(Student student) {
+        studentRepository.addingStudentToDB(student);
     }
 
-    public void addStudent(Student student) {
-        repository.addStudent(student);
+    public void addingTeacher(Teacher teacher) {
+        studentRepository.addingTeacherToDB(teacher);
     }
 
-    public void addTeacher(Teacher teacher) {
-        repository.addTeacher(teacher);
+    public void addingStudentTeacherPair(String student, String teacher) {
+        studentRepository.addingStudentTeacherPairToDB(student,teacher);
     }
 
-    public void addStudentTeacherPair(String student, String teacher) {
-        repository.addStudentTeacherPair(student, teacher);
+    public Student gettingStudentByName(String name) {
+        return studentRepository.gettingStudentByNameFromDB(name);
     }
 
-    public Student getStudentByName(String name) {
-        return repository.getStudentByName(name);
+    public Teacher gettingTeacherByName(String name) {
+        return studentRepository.gettingTeacherByNameFromDB(name);
     }
 
-    public Teacher getTeacherByName(String name) {
-        return repository.getTeacherByName(name);
+    public List<String> gettingStudentsByTeacherName(String teacher) {
+        return studentRepository.gettingStudentsByTeacherNameFromDB(teacher);
     }
 
-    public List<String> getStudentsByTeacherName(String teacher) {
-        return repository.getStudentsByTeacherName(teacher);
+    public List<String> gettingAllStudents() {
+        return studentRepository.gettingAllStudentsFromDB();
     }
 
-    public List<String> getAllStudents() {
-        return repository.getAllStudents();
+    public void deletingTeacherByName(String teacher) {
+        studentRepository.deletingTeacherByNameFromDB(teacher);
     }
 
-    public void deleteTeacherByName(String teacher) {
-        repository.deleteTeacherByName(teacher);
-    }
-
-    public void deleteAllTeachers() {
-        repository.deleteAllTeachers();
+    public void deletingAllTeachers() {
+        studentRepository.deletingAllTeachersFromDB();
     }
 }
