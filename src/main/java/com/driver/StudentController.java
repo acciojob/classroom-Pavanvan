@@ -14,65 +14,68 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
-@RequestMapping("students")
+@RequestMapping("/students")
 public class StudentController {
 
-    @PostMapping("/add-student")
-    public ResponseEntity<String> addStudent(@RequestBody Student student){
+    private final StudentService studentService;
 
-        return new ResponseEntity<>("New student added successfully", HttpStatus.CREATED);
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @PostMapping("/add-student")
+    public ResponseEntity<String> addStudent(@RequestBody Student student) {
+        studentService.addStudent(student);
+        return ResponseEntity.status(HttpStatus.CREATED).body("New student added successfully");
     }
 
     @PostMapping("/add-teacher")
-    public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher){
-
-        return new ResponseEntity<>("New teacher added successfully", HttpStatus.CREATED);
+    public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher) {
+        studentService.addTeacher(teacher);
+        return ResponseEntity.status(HttpStatus.CREATED).body("New teacher added successfully");
     }
 
     @PutMapping("/add-student-teacher-pair")
-    public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher){
-
-        return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
+    public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher) {
+        studentService.addStudentTeacherPair(student, teacher);
+        return ResponseEntity.status(HttpStatus.CREATED).body("New student-teacher pair added successfully");
     }
 
     @GetMapping("/get-student-by-name/{name}")
-    public ResponseEntity<Student> getStudentByName(@PathVariable String name){
-        Student student = null; // Assign student by calling service layer method
-
-        return new ResponseEntity<>(student, HttpStatus.CREATED);
+    public ResponseEntity<Student> getStudentByName(@PathVariable String name) {
+        Student student = studentService.getStudentByName(name);
+        return ResponseEntity.status(HttpStatus.OK).body(student);
     }
 
     @GetMapping("/get-teacher-by-name/{name}")
-    public ResponseEntity<Teacher> getTeacherByName(@PathVariable String name){
-        Teacher teacher = null; // Assign student by calling service layer method
-
-        return new ResponseEntity<>(teacher, HttpStatus.CREATED);
+    public ResponseEntity<Teacher> getTeacherByName(@PathVariable String name) {
+        Teacher teacher = studentService.getTeacherByName(name);
+        return ResponseEntity.status(HttpStatus.OK).body(teacher);
     }
 
     @GetMapping("/get-students-by-teacher-name/{teacher}")
-    public ResponseEntity<List<String>> getStudentsByTeacherName(@PathVariable String teacher){
-        List<String> students = null; // Assign list of student by calling service layer method
-
-        return new ResponseEntity<>(students, HttpStatus.CREATED);
+    public ResponseEntity<List<String>> getStudentsByTeacherName(@PathVariable String teacher) {
+        List<String> students = studentService.getStudentsByTeacherName(teacher);
+        return ResponseEntity.status(HttpStatus.OK).body(students);
     }
 
     @GetMapping("/get-all-students")
-    public ResponseEntity<List<String>> getAllStudents(){
-        List<String> students = null; // Assign list of student by calling service layer method
-
-        return new ResponseEntity<>(students, HttpStatus.CREATED);
+    public ResponseEntity<List<String>> getAllStudents() {
+        List<String> students = studentService.getAllStudents();
+        return ResponseEntity.status(HttpStatus.OK).body(students);
     }
 
     @DeleteMapping("/delete-teacher-by-name")
-    public ResponseEntity<String> deleteTeacherByName(@RequestParam String teacher){
-
-        return new ResponseEntity<>(teacher + " removed successfully", HttpStatus.CREATED);
+    public ResponseEntity<String> deleteTeacherByName(@RequestParam String teacher) {
+        studentService.deleteTeacherByName(teacher);
+        return ResponseEntity.status(HttpStatus.OK).body(teacher + " removed successfully");
     }
-    @DeleteMapping("/delete-all-teachers")
-    public ResponseEntity<String> deleteAllTeachers(){
 
-        return new ResponseEntity<>("All teachers deleted successfully", HttpStatus.CREATED);
+    @DeleteMapping("/delete-all-teachers")
+    public ResponseEntity<String> deleteAllTeachers() {
+        studentService.deleteAllTeachers();
+        return ResponseEntity.status(HttpStatus.OK).body("All teachers deleted successfully");
     }
 }
+
