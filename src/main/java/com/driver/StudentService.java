@@ -36,14 +36,16 @@ public class StudentService {
     }
 
     public List<String> gettingAllStudents() {
+        //****************************************
         return studentRepository.gettingAllStudentsFromDB();
     }
 
     public void deletingTeacherByName(String teacher) {
+        //*******************************************
         studentRepository.deletingTeacherByNameFromDB(teacher);
     }
 
     public void deletingAllTeachers() {
         studentRepository.deletingAllTeachersFromDB();
     }
-}
+}//******************************************

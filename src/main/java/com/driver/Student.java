@@ -1,14 +1,14 @@
 package com.driver;
 
-
-
 public class Student {
 
     private String name;
     private int age;
     private double averageScore;
 
-    public Student() {}
+    public Student(){
+
+    }
 
     public Student(String name, int age, double averageScore) {
         this.name = name;
@@ -21,10 +21,15 @@ public class Student {
     }
 
     public void setName(String name) {
+
+
+
+        //*************-----------
         this.name = name;
     }
 
     public int getAge() {
+        //---------==========---------
         return age;
     }
 
@@ -39,4 +44,14 @@ public class Student {
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", averageScore=" + averageScore +
+                '}';
+    }
+    //******************************************************************
 }

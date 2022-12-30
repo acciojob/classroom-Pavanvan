@@ -1,11 +1,16 @@
 package com.driver;
 
 public class Teacher {
+
     private String name;
+
     private int numberOfStudents;
+
     private int age;
 
-    public Teacher() {}
+    public Teacher() {
+
+    }
 
     public Teacher(String name, int numberOfStudents, int age) {
         this.name = name;
@@ -35,5 +40,16 @@ public class Teacher {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        //////**********************************
+        //5222226+wvvvvvvvvvvvvvv
+        return "Teacher{" +
+                "name='" + name + '\'' +
+                ", numberOfStudents=" + numberOfStudents +
+                ", age=" + age +
+                '}';
     }
 }

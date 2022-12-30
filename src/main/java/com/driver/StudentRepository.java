@@ -14,10 +14,12 @@ public class StudentRepository {
     HashMap<String,Student> studentHashMap=new HashMap<>();
     HashMap<Teacher, List<String>> teacherHashMap=new HashMap<>();
     public void addingStudentToDB(Student student) {
+        //***********************
         studentHashMap.put(student.getName(),student);
     }
 
     public void addingTeacherToDB(Teacher teacher) {
+        //***********************
         List<String> list=new ArrayList<>();
         teacherHashMap.put(teacher,list);
     }
@@ -25,6 +27,7 @@ public class StudentRepository {
     public void addingStudentTeacherPairToDB(String student, String teacher) {
         for(Teacher teacher1:teacherHashMap.keySet()){
             if(Objects.equals(teacher,teacher1.getName())){
+                ////////////*********************************************
                 List<String> list;
                 list=teacherHashMap.get(teacher1);
                 list.add(student);
@@ -32,6 +35,7 @@ public class StudentRepository {
                 teacherHashMap.put(teacher1,list);
                 return;
             }
+            //******************************************
         }
     }
 
